@@ -17,27 +17,29 @@ const content = {
 	type={'website'}
 >
 	<section
-		class='w-full h-screen flex items-center justify-center bg-[#1D3D69]'
+		class='w-full h-screen flex items-center justify-center '
 	>
 		<div class='text-center flex flex-col items-center'>
 			<span
-				class='text-white font-titles tracking-tighter text-[30px] leading-[1em] font-bold'
+				class='text-primary font-display tracking-tighter text-[30px] leading-[1em] font-bold'
 				>Ups..</span
 			>
 			<h1
-				class='text-white font-subtitles tracking-tighter text-[120px] 2xl:text-[140px] leading-[1em] mb-8'
+				class='text-primary font-body tracking-tighter text-[120px] 2xl:text-[140px] leading-[1em] mb-8'
 			>
 				404
 			</h1>
 			<p
-				class='font-titles tracking-tighter text-white text-[30px]
+				class='font-display tracking-tighter text-primary text-[30px]
                  leading-[1em] mb-8 font-bold'
 			>
 				{content.alert}
 			</p>
-			<div class='pt-4'>
-				<a href={content.link}>Return home</a>
+			<a href={content.link} class="font-body">
+			<div class='cursor-pointer p-4 bg-primary hover:bg-white border-primary border-2 ease-in-out transition-all duration-300 text-white hover:text-primary'>
+				Return home
 			</div>
+			</a>
 		</div>
 	</section>
 </MainLayout>

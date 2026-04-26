@@ -5,24 +5,24 @@
 			"prefix": "$",
 			"suffix": "M+",
 			"label": "CAPITAL DEPLOYMENT",
-			"title": "AUM"
+			"title": "Assets Under Management"
 		},
 		{
 			"numericValue": 3500,
 			"prefix": "",
 			"suffix": "+",
 			"label": "PORTFOLIO SCALE",
-			"title": "UNITS"
+			"title": "Residential Units"
 		},
 		{
 			"staticValue": "18-22%",
 			"label": "TARGET YIELD",
-			"title": "TARGET IRR"
+			"title": "Target IRR"
 		},
 		{
 			"staticValue": "Core SE",
 			"label": "GEOGRAPHIC FOCUS",
-			"title": "MARKETS"
+			"title": "Southeast Markets"
 		}
 	]
 }

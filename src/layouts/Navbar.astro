@@ -1,10 +1,10 @@
 ---
 const Links = [
-	{ text: 'Portfolio',   link: '#portfolio'  },
-	{ text: 'Strategy',    link: '#strategy'   },
-	{ text: 'Leadership',  link: '#leadership' },
-	{ text: 'Insights',    link: '#counter-section-blue'   },
-	{ text: 'Contact',     link: '#contact'    },
+	{ text: 'Portfolio',  link: '#portfolio'         },
+	{ text: 'Strategy',   link: '#hero'               },
+	{ text: 'Leadership', link: '#leadership'         },
+	{ text: 'Insights',   link: '#counter-section-blue' },
+	{ text: 'Contact',    link: '#contact'            },
 ]
 ---
 
@@ -17,7 +17,6 @@ const Links = [
 		<a
 			href='/'
 			class='font-body font-semibold tracking-widest text-[13px] md:text-[14px] xl:text-[18px] text-primary uppercase shrink-0'
-			style='letter-spacing: var(--tracking-widest);'
 		>
 			Harbor Capital Partners
 		</a>
@@ -35,7 +34,7 @@ const Links = [
 
 		<button
 			id='menu-toggle'
-			class='md:hidden flex flex-col gap-1.25 p-2'
+			class='md:hidden flex flex-col gap-1.25 p-2 relative z-60'
 			aria-label='Toggle menu'
 		>
 			<span class='hamburger-line w-6 h-[1.5px] bg-primary transition-all duration-300'></span>
@@ -43,50 +42,53 @@ const Links = [
 			<span class='hamburger-line w-4 h-[1.5px] bg-primary transition-all duration-300'></span>
 		</button>
 	</div>
-
-	<div
-		id='mobile-menu'
-		class='md:hidden fixed inset-0 z-40 bg-[#0F172A] flex flex-col items-center justify-center
-		       opacity-0 pointer-events-none transition-all duration-500 translate-y-5'
-	>
-		<button
-			id='menu-close'
-			class='absolute top-6 right-[5vw] text-[#94A3B8] hover:text-white transition-colors'
-			aria-label='Close menu'
-		>
-			<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
-				<line x1='18' y1='6' x2='6' y2='18'/>
-				<line x1='6' y1='6' x2='18' y2='18'/>
-			</svg>
-		</button>
-
-		<a
-			href='/'
-			class='absolute top-6 left-[5vw] font-body font-semibold tracking-widest text-[11px] text-white uppercase'
-		>
-			Harbor Capital Partners
-		</a>
-
-		<nav class='flex flex-col items-center gap-8'>
-			{Links.map((link, i) => (
-				<a
-					href={link.link}
-					class='mobile-nav-link font-display text-[32px] font-light text-white hover:text-[#B59A5D] transition-colors duration-300'
-					style={`transition-delay: ${i * 60}ms`}
-				>
-					{link.text}
-				</a>
-			))}
-		</nav>
-
-		<div class='absolute bottom-12 text-center'>
-			<div class='w-10 h-px bg-[#B59A5D] mx-auto mb-4'></div>
-			<p class='font-body text-[11px] tracking-widest text-[#94A3B8] uppercase'>
-				Institutional-Grade Real Estate
-			</p>
-		</div>
-	</div>
 </header>
+
+<!-- Mobile menu FUERA del header para evitar conflictos de z-index y stacking context -->
+<div
+	id='mobile-menu'
+	class='md:hidden fixed inset-0 bg-[#0F172A] flex flex-col items-center justify-center
+	       opacity-0 pointer-events-none transition-opacity duration-400'
+	style='z-index: 55;'
+>
+	<button
+		id='menu-close'
+		class='absolute top-6 right-[5vw] text-[#94A3B8] hover:text-white transition-colors'
+		style='z-index: 56;'
+		aria-label='Close menu'
+	>
+		<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
+			<line x1='18' y1='6' x2='6' y2='18'/>
+			<line x1='6' y1='6' x2='18' y2='18'/>
+		</svg>
+	</button>
+
+	<a
+		href='/'
+		class='absolute top-6 left-[5vw] font-body font-semibold tracking-widest text-[11px] text-white uppercase'
+	>
+		Harbor Capital Partners
+	</a>
+
+	<nav class='flex flex-col items-center gap-8'>
+		{Links.map((link, i) => (
+			<a
+				href={link.link}
+				class='mobile-nav-link font-display text-[32px] font-light text-white hover:text-[#B59A5D] transition-colors duration-300'
+				style={`transition-delay: ${i * 60}ms`}
+			>
+				{link.text}
+			</a>
+		))}
+	</nav>
+
+	<div class='absolute bottom-12 text-center'>
+		<div class='w-10 h-px bg-[#B59A5D] mx-auto mb-4'></div>
+		<p class='font-body text-[11px] tracking-widest text-[#94A3B8] uppercase'>
+			Institutional-Grade Real Estate
+		</p>
+	</div>
+</div>
 
 <style>
 	body.menu-open {
@@ -97,7 +99,13 @@ const Links = [
 	#navbar.scrolled {
 		background-color: #ffffffb7;
 		backdrop-filter: blur(12px);
-		color: white;
+	}
+
+	/* Cuando el menú está abierto, el header vuelve a ser opaco para que el hamburger se vea bien */
+	#navbar.menu-open {
+		background-color: transparent;
+		backdrop-filter: none;
+		box-shadow: none;
 	}
 
 	.nav-link::after {
@@ -118,17 +126,20 @@ const Links = [
 	#mobile-menu.open {
 		opacity: 1;
 		pointer-events: all;
-		translate: 0;
 	}
 
-	header.menu-open .hamburger-line:nth-child(1) {
+	/* Hamburger → X: las líneas cambian cuando el header tiene .menu-open */
+	#navbar.menu-open .hamburger-line {
+		background-color: white;
+	}
+	#navbar.menu-open .hamburger-line:nth-child(1) {
 		transform: translateY(6.5px) rotate(45deg);
 	}
-	header.menu-open .hamburger-line:nth-child(2) {
+	#navbar.menu-open .hamburger-line:nth-child(2) {
 		opacity: 0;
 		transform: scaleX(0);
 	}
-	header.menu-open .hamburger-line:nth-child(3) {
+	#navbar.menu-open .hamburger-line:nth-child(3) {
 		width: 24px;
 		transform: translateY(-6.5px) rotate(-45deg);
 	}
@@ -143,8 +154,6 @@ const Links = [
 	const mobileMenu  = document.getElementById('mobile-menu')!
 	const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link')
 
-	let isMenuOpen = false
-
 	const blockScroll = (e: Event) => e.preventDefault()
 
 	function getScrollbarWidth(): number {
@@ -156,18 +165,16 @@ const Links = [
 	})
 
 	function openMenu() {
-		isMenuOpen = true
 		const sbWidth = getScrollbarWidth()
 		document.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`)
 		mobileMenu.classList.add('open')
 		navbar.classList.add('menu-open')
 		document.body.classList.add('menu-open')
-		window.addEventListener('wheel',      blockScroll, { passive: false })
-		window.addEventListener('touchmove',  blockScroll, { passive: false })
+		window.addEventListener('wheel',     blockScroll, { passive: false })
+		window.addEventListener('touchmove', blockScroll, { passive: false })
 	}
 
 	function closeMenu() {
-		isMenuOpen = false
 		mobileMenu.classList.remove('open')
 		navbar.classList.remove('menu-open')
 		document.body.classList.remove('menu-open')
