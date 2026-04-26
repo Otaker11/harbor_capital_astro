@@ -1,0 +1,43 @@
+---
+import MainLayout from '../layouts/MainLayout.astro'
+const locale = Astro.currentLocale as 'en' | 'es'
+//comentario merge 17
+
+const content = {
+		alert: 'Page not found',
+		btnText: 'Back to homepage',
+		link: '/',
+}
+---
+
+<MainLayout
+	seo_title='404'
+	seo_description='Sermib'
+	keywords='Sermib'
+	type={'website'}
+>
+	<section
+		class='w-full h-screen flex items-center justify-center bg-[#1D3D69]'
+	>
+		<div class='text-center flex flex-col items-center'>
+			<span
+				class='text-white font-titles tracking-tighter text-[30px] leading-[1em] font-bold'
+				>Ups..</span
+			>
+			<h1
+				class='text-white font-subtitles tracking-tighter text-[120px] 2xl:text-[140px] leading-[1em] mb-8'
+			>
+				404
+			</h1>
+			<p
+				class='font-titles tracking-tighter text-white text-[30px]
+                 leading-[1em] mb-8 font-bold'
+			>
+				{content.alert}
+			</p>
+			<div class='pt-4'>
+				<a href={content.link}>Return home</a>
+			</div>
+		</div>
+	</section>
+</MainLayout>

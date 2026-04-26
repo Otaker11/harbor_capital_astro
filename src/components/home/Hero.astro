@@ -1,0 +1,283 @@
+---
+import 'swiper/css'
+import 'swiper/css/parallax'
+import 'swiper/css/autoplay'
+
+interface Props {
+	locale: 'en'
+}
+const { locale = 'en' } = Astro.props
+
+const content = {
+	en: {
+		slides: [
+			{
+				title: 'Institutional-Grade',
+				titleLine2: 'Real Estate Investment',
+				desc: 'Managing over $300M in strategic multifamily assets across the American Southeast, delivering disciplined risk-adjusted returns for private equity partners.',
+				img: '/img/hero1.webp',
+			},
+			{
+				title: 'Disciplined Capital.',
+				titleLine2: 'Lasting Value.',
+				desc: 'A vertically integrated platform built on rigorous underwriting, active asset management, and a deep network across Core Southeast markets.',
+				img: '/img/hero2.webp',
+			},
+		],
+		cta: 'Inquire Now',
+		ctaLink: '#contact',
+		scroll: 'Scroll',
+	},
+}
+
+const t = content[locale]
+const slides = t.slides
+---
+
+<style>
+	.hero-gradient {
+		background: linear-gradient(
+			to right,
+			rgba(15, 23, 42, 0.88) 0%,
+			rgba(15, 23, 42, 0.55) 55%,
+			rgba(15, 23, 42, 0.15) 100%
+		);
+	}
+
+	.swiper {
+		width: 100%;
+		height: 100%;
+	}
+
+	.swiper-wrapper {
+		height: 100%;
+	}
+
+	.swiper-slide {
+		height: 100%;
+		overflow: hidden;
+	}
+
+	.slide-bg {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+	}
+
+	.slide-bg img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center;
+		display: block;
+		filter: brightness(0.45) contrast(1.1);
+	}
+
+	.slide-nav-container {
+		position: absolute;
+		bottom: 48px;
+		right: 5vw;
+		z-index: 30;
+		display: flex;
+		gap: 10px;
+		align-items: center;
+	}
+
+	.slide-nav-line {
+		position: relative;
+		width: 56px;
+		height: 4px;
+		background: rgba(255, 255, 255, 0.2);
+		cursor: pointer;
+		overflow: hidden;
+		transition: background 0.3s ease;
+	}
+
+	.slide-nav-line:hover {
+		background: rgba(255, 255, 255, 0.35);
+	}
+
+	.slide-nav-line.active {
+		background: rgba(255, 255, 255, 0.3);
+	}
+
+	.slide-nav-progress {
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 150%;
+		background: #B59A5D;
+		width: 0%;
+		transition: width 0.1s linear;
+	}
+
+	.scroll-indicator {
+		position: absolute;
+		bottom: 40px;
+		left: 50%;
+		transform: translateX(-50%);
+		z-index: 20;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 8px;
+	}
+
+	@media (max-width: 768px) {
+		.slide-nav-container {
+			bottom: 36px;
+			left: 50%;
+			right: auto;
+			transform: translateX(-50%);
+			gap: 8px;
+		}
+		.slide-nav-line {
+			width: 36px;
+		}
+		.scroll-indicator {
+			display: none;
+		}
+	}
+</style>
+
+<section id='hero' class="portrait:h-screen portrait:md:h-full landscape:h-screen">
+	<div class='swiper myHeroSwiper'>
+		<div class='swiper-wrapper'>
+			{slides.map((slide) => (
+				<div class='swiper-slide relative flex items-end md:items-center'>
+
+					<div class='slide-bg' >
+						<img
+							src={slide.img}
+							alt={slide.title}
+							width='1440'
+							height='960'
+						/>
+						<div class='absolute inset-0 hero-gradient' />
+					</div>
+
+					<div class='relative z-10 w-full px-[5vw] md:px-[5vw] pb-28 md:pb-[10%] pt-[56%] sm:pt-[40%] md:pt-[20%] xl:pt-[15%]'>
+						<div class=''>
+
+							<div data-swiper-parallax='-400' data-swiper-parallax-duration='700'>
+								<h1 class='font-display font-semibold text-[2.5rem] md:text-[3.5rem] lg:text-[4rem] xl:text-[4.5rem] text-white leading-[1.1em] mb-5 md:mb-6'>
+									{slide.title}<br />
+									{slide.titleLine2}
+								</h1>
+							</div>
+
+							<div
+								data-swiper-parallax='-600'
+								data-swiper-parallax-opacity='0'
+								data-swiper-parallax-duration='900'
+							>
+								<p class='font-body text-[14px] md:text-[16px] text-[#94A3B8] mb-8 md:mb-10 max-w-lg leading-[1.7em]'>
+									{slide.desc}
+								</p>
+							</div>
+
+							<div
+								data-swiper-parallax='-800'
+								data-swiper-parallax-duration='1100'
+							>
+								<a
+									href={t.ctaLink}
+									class='inline-block font-body font-semibold text-[12px] tracking-[0.12em] uppercase
+									       bg-transparent text-white border border-white
+									       px-8 py-4 transition-all duration-300
+									       hover:bg-white hover:text-[#0F172A]'
+								>
+									{t.cta}
+								</a>
+							</div>
+
+						</div>
+					</div>
+				</div>
+			))}
+		</div>
+
+		<div class='slide-nav-container'>
+			{slides.map((_, index) => (
+				<div class='slide-nav-line' data-slide-index={index}>
+					<div class='slide-nav-progress' />
+				</div>
+			))}
+		</div>
+
+		<div class='scroll-indicator'>
+			<span class='font-body text-[10px] uppercase tracking-widest text-[#94A3B8]'>
+				{t.scroll}
+			</span>
+			<div class='w-px h-10 bg-linear-to-b from-[#B59A5D] to-transparent' />
+		</div>
+	</div>
+</section>
+
+<script>
+	import Swiper from 'swiper'
+	import { Parallax, Autoplay } from 'swiper/modules'
+
+	const navLines = document.querySelectorAll('.slide-nav-line')
+
+	function updateProgressBars(swiperInstance: any) {
+		const realIndex = swiperInstance.realIndex
+		navLines.forEach((line, index) => {
+			const progressBar = line.querySelector('.slide-nav-progress') as HTMLElement
+			if (index === realIndex) {
+				line.classList.add('active')
+				if (progressBar) progressBar.style.width = '0%'
+			} else if (index < realIndex) {
+				line.classList.remove('active')
+				if (progressBar) progressBar.style.width = '100%'
+			} else {
+				line.classList.remove('active')
+				if (progressBar) progressBar.style.width = '0%'
+			}
+		})
+	}
+
+	function updateActiveProgress(swiperInstance: any, progress: number) {
+		const realIndex = swiperInstance.realIndex
+		const activeLine = document.querySelector(
+			`.slide-nav-line[data-slide-index="${realIndex}"]`
+		)
+		if (activeLine) {
+			const progressBar = activeLine.querySelector('.slide-nav-progress') as HTMLElement
+			if (progressBar) progressBar.style.width = `${(1 - progress) * 100}%`
+		}
+	}
+
+	const swiper = new Swiper('.myHeroSwiper', {
+		modules: [Parallax, Autoplay],
+		speed: 1200,
+		parallax: true,
+		loop: true,
+		autoplay: {
+			delay: 8000,
+			disableOnInteraction: false,
+		},
+		grabCursor: false,
+		slidesPerView: 1,
+		watchSlidesProgress: true,
+		on: {
+			init: function () {
+				updateProgressBars(this)
+			},
+			slideChange: function () {
+				updateProgressBars(this)
+			},
+			autoplayTimeLeft: function (s, time, progress) {
+				updateActiveProgress(s, progress)
+			},
+		},
+	})
+
+	navLines.forEach((line) => {
+		line.addEventListener('click', function (this: HTMLElement) {
+			const slideIndex = parseInt(this.getAttribute('data-slide-index') || '0')
+			swiper.slideToLoop(slideIndex)
+		})
+	})
+</script>

@@ -1,0 +1,227 @@
+---
+const Links = [
+	{ text: 'Portfolio',   link: '#portfolio'  },
+	{ text: 'Strategy',    link: '#strategy'   },
+	{ text: 'Leadership',  link: '#leadership' },
+	{ text: 'Insights',    link: '#counter-section-blue'   },
+	{ text: 'Contact',     link: '#contact'    },
+]
+---
+
+<header
+	id='navbar'
+	class='w-full fixed left-0 top-0 z-50 transition-all duration-500 bg-white'
+>
+	<div class='mx-auto flex items-center justify-between px-[5vw] h-18 md:h-20'>
+
+		<a
+			href='/'
+			class='font-body font-semibold tracking-widest text-[13px] md:text-[14px] xl:text-[18px] text-primary uppercase shrink-0'
+			style='letter-spacing: var(--tracking-widest);'
+		>
+			Harbor Capital Partners
+		</a>
+
+		<nav class='hidden md:flex items-center gap-8 lg:gap-10'>
+			{Links.map((link) => (
+				<a
+					href={link.link}
+					class='nav-link font-body font-medium text-[12px] lg:text-[13px] uppercase tracking-wide text-primary hover:text-tertiary transition-colors duration-300 relative'
+				>
+					{link.text}
+				</a>
+			))}
+		</nav>
+
+		<button
+			id='menu-toggle'
+			class='md:hidden flex flex-col gap-1.25 p-2'
+			aria-label='Toggle menu'
+		>
+			<span class='hamburger-line w-6 h-[1.5px] bg-primary transition-all duration-300'></span>
+			<span class='hamburger-line w-6 h-[1.5px] bg-primary transition-all duration-300'></span>
+			<span class='hamburger-line w-4 h-[1.5px] bg-primary transition-all duration-300'></span>
+		</button>
+	</div>
+
+	<div
+		id='mobile-menu'
+		class='md:hidden fixed inset-0 z-40 bg-[#0F172A] flex flex-col items-center justify-center
+		       opacity-0 pointer-events-none transition-all duration-500 translate-y-5'
+	>
+		<button
+			id='menu-close'
+			class='absolute top-6 right-[5vw] text-[#94A3B8] hover:text-white transition-colors'
+			aria-label='Close menu'
+		>
+			<svg width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
+				<line x1='18' y1='6' x2='6' y2='18'/>
+				<line x1='6' y1='6' x2='18' y2='18'/>
+			</svg>
+		</button>
+
+		<a
+			href='/'
+			class='absolute top-6 left-[5vw] font-body font-semibold tracking-widest text-[11px] text-white uppercase'
+		>
+			Harbor Capital Partners
+		</a>
+
+		<nav class='flex flex-col items-center gap-8'>
+			{Links.map((link, i) => (
+				<a
+					href={link.link}
+					class='mobile-nav-link font-display text-[32px] font-light text-white hover:text-[#B59A5D] transition-colors duration-300'
+					style={`transition-delay: ${i * 60}ms`}
+				>
+					{link.text}
+				</a>
+			))}
+		</nav>
+
+		<div class='absolute bottom-12 text-center'>
+			<div class='w-10 h-px bg-[#B59A5D] mx-auto mb-4'></div>
+			<p class='font-body text-[11px] tracking-widest text-[#94A3B8] uppercase'>
+				Institutional-Grade Real Estate
+			</p>
+		</div>
+	</div>
+</header>
+
+<style>
+	body.menu-open {
+		overflow: hidden;
+		padding-right: var(--scrollbar-width, 0px);
+	}
+
+	#navbar.scrolled {
+		background-color: #ffffffb7;
+		backdrop-filter: blur(12px);
+		color: white;
+	}
+
+	.nav-link::after {
+		content: '';
+		position: absolute;
+		bottom: -4px;
+		left: 0;
+		width: 0;
+		height: 1px;
+		background-color: #B59A5D;
+		transition: width 0.3s ease;
+	}
+	.nav-link:hover::after,
+	.nav-link.active::after {
+		width: 100%;
+	}
+
+	#mobile-menu.open {
+		opacity: 1;
+		pointer-events: all;
+		translate: 0;
+	}
+
+	header.menu-open .hamburger-line:nth-child(1) {
+		transform: translateY(6.5px) rotate(45deg);
+	}
+	header.menu-open .hamburger-line:nth-child(2) {
+		opacity: 0;
+		transform: scaleX(0);
+	}
+	header.menu-open .hamburger-line:nth-child(3) {
+		width: 24px;
+		transform: translateY(-6.5px) rotate(-45deg);
+	}
+</style>
+
+<script>
+	document.documentElement.style.scrollBehavior = 'smooth'
+
+	const navbar      = document.getElementById('navbar')!
+	const menuToggle  = document.getElementById('menu-toggle')!
+	const menuClose   = document.getElementById('menu-close')!
+	const mobileMenu  = document.getElementById('mobile-menu')!
+	const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link')
+
+	let isMenuOpen = false
+
+	const blockScroll = (e: Event) => e.preventDefault()
+
+	function getScrollbarWidth(): number {
+		return window.innerWidth - document.documentElement.clientWidth
+	}
+
+	window.addEventListener('scroll', () => {
+		navbar.classList.toggle('scrolled', window.scrollY > 20)
+	})
+
+	function openMenu() {
+		isMenuOpen = true
+		const sbWidth = getScrollbarWidth()
+		document.documentElement.style.setProperty('--scrollbar-width', `${sbWidth}px`)
+		mobileMenu.classList.add('open')
+		navbar.classList.add('menu-open')
+		document.body.classList.add('menu-open')
+		window.addEventListener('wheel',      blockScroll, { passive: false })
+		window.addEventListener('touchmove',  blockScroll, { passive: false })
+	}
+
+	function closeMenu() {
+		isMenuOpen = false
+		mobileMenu.classList.remove('open')
+		navbar.classList.remove('menu-open')
+		document.body.classList.remove('menu-open')
+		document.documentElement.style.removeProperty('--scrollbar-width')
+		window.removeEventListener('wheel',     blockScroll)
+		window.removeEventListener('touchmove', blockScroll)
+	}
+
+	menuToggle.addEventListener('click', openMenu)
+	menuClose.addEventListener('click', closeMenu)
+
+	mobileLinks.forEach(link => {
+		link.addEventListener('click', (e) => {
+			const href = (link as HTMLAnchorElement).getAttribute('href')
+			if (href?.startsWith('#')) {
+				e.preventDefault()
+				closeMenu()
+				setTimeout(() => {
+					document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+				}, 380)
+			} else {
+				closeMenu()
+			}
+		})
+	})
+
+	document.querySelectorAll<HTMLAnchorElement>('.nav-link').forEach(link => {
+		link.addEventListener('click', (e) => {
+			const href = link.getAttribute('href')
+			if (href?.startsWith('#')) {
+				e.preventDefault()
+				document.querySelector(href)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+			}
+		})
+	})
+
+	const sections = document.querySelectorAll('section[id]')
+	const navLinks = document.querySelectorAll('.nav-link')
+
+	const observer = new IntersectionObserver(
+		(entries) => {
+			entries.forEach(entry => {
+				if (entry.isIntersecting) {
+					navLinks.forEach(link => {
+						link.classList.toggle(
+							'active',
+							link.getAttribute('href') === `#${entry.target.id}`
+						)
+					})
+				}
+			})
+		},
+		{ rootMargin: '-40% 0px -55% 0px' }
+	)
+
+	sections.forEach(section => observer.observe(section))
+</script>

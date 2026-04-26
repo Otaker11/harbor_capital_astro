@@ -1,0 +1,35 @@
+@import 'tailwindcss';
+
+.grecaptcha-badge {
+	z-index: 9999;
+}
+
+@theme {
+	/* ── Harbor Capital – Color Palette ── */
+	--color-primary:        #0F172A;   /* Navy dark  */
+	--color-secondary:      #94A3B8;   /* Blue-grey  */
+	--color-tertiary:       #B59A5D;   /* Gold       */
+	--color-neutral:        #F8FAFC;   /* Off-white  */
+
+	/* Aliases semánticos */
+	--color-navy:           #0F172A;
+	--color-navy-mid:       #1E2D45;
+	--color-gold:           #B59A5D;
+	--color-gold-light:     #D4B97A;
+	--color-slate:          #94A3B8;
+	--color-slate-dark:     #64748B;
+	--color-bg-light:       #F8FAFC;
+	--color-bg-dark:        #0F172A;
+	--color-text-muted:     #64748B;
+	--color-border:         #E2E8F0;
+
+	/* ── Tipografías ── */
+	--font-display: 'Noto Serif', serif;       /* Títulos / Headlines */
+	--font-body:    'Public Sans', sans-serif; /* Body, labels, nav   */
+	--font-mono:    'JetBrains Mono', monospace;
+
+	/* ── Letter Spacing ── */
+	--tracking-tightest: -0.03em;
+	--tracking-wide:      0.08em;
+	--tracking-widest:    0.15em;
+}

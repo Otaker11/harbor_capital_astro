@@ -1,0 +1,92 @@
+---
+import '../styles/global.css'
+import { SEO } from 'astro-seo'
+import Footer from './Footer.astro'
+import Navbar from './Navbar.astro'
+
+const { currentLocale } = Astro
+const currentURL = Astro.url
+
+interface Props {
+	seo_title: string
+	seo_description: string
+	keywords: string
+	og_img?: string
+	type: 'website' | 'article'
+}
+
+const { seo_title, seo_description, keywords, og_img = '', type } = Astro.props
+---
+
+<html lang={currentLocale}>
+	<head>
+		<meta charset='utf-8' />
+		<link rel='icon' type='image/x-icon' href='/favicon.ico' />
+		<meta name='viewport' content='width=device-width' />
+		<meta name='generator' content={Astro.generator} />
+
+		<!-- Google Fonts: Noto Serif + Public Sans -->
+		<link rel='preconnect' href='https://fonts.googleapis.com' />
+		<link rel='preconnect' href='https://fonts.gstatic.com' crossorigin='' />
+		<link
+			href='https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,600&family=Public+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap'
+			rel='stylesheet'
+		/>
+		<link
+			href='https://fonts.googleapis.com/icon?family=Material+Icons+Outlined'
+			rel='stylesheet'
+		/>
+
+		<SEO
+			title={seo_title}
+			description={seo_description}
+			canonical={currentURL.href}
+			openGraph={{
+				basic: {
+					title: seo_title,
+					type: type,
+					image: og_img,
+					url: currentURL,
+				},
+				optional: { description: seo_description },
+			}}
+			twitter={{
+				title: seo_title,
+				description: seo_description,
+				site: currentURL.origin,
+				card: 'summary_large_image',
+				image: og_img,
+			}}
+			extend={{
+				meta: [
+					{ name: 'keywords', content: keywords },
+					{ name: 'robots', content: 'index' },
+					{ name: 'robots', content: 'follow' },
+					{ name: 'copyright', content: 'Harbor Capital Partners' },
+					{ name: 'author', content: 'Harbor Capital' },
+				],
+				link: [{ rel: 'sitemap', href: '/sitemap-index.xml' }],
+			}}
+		/>
+	</head>
+
+	<body class='bg-[#F8FAFC] font-body antialiased'>
+		<Navbar />
+		<slot />
+		<Footer />
+		<script>
+			import Lenis from 'lenis'
+			import AOS from 'aos'
+
+			const lenis = new Lenis()
+
+			function raf(time: number) {
+				lenis.raf(time)
+				requestAnimationFrame(raf)
+			}
+
+			requestAnimationFrame(raf)
+			AOS.init({ once: true })
+		</script>
+	</body>
+</html>
