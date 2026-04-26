@@ -2,13 +2,13 @@
 const leader = {
 	name: 'Marcus Thorne',
 	role: 'Managing Partner & Founder',
-	avatar: '/img/marcus.jpg',
+	avatar: '/img/leader.webp',
 	quote:
 		'"Lorem ipsum dolor sit amet consectetur adipiscing elit sociis viverra, volutpat ornare ridiculus magna nulla inceptos egestas scelerisque mus habitant."',
 }
 
 const investorCard = {
-	icon: '⌂',
+	icon: '/img/home.svg',
 	text: 'Lorem ipsum dolor sit amet consectetur adipiscing elit sociis viverra.',
 }
 ---
@@ -30,10 +30,9 @@ const investorCard = {
 				</h2>
 
 				<div class='space-y-4 mb-10'>
-					<p class='font-body text-[14px] lg:text-[15px] text-[#64748B] leading-relaxed'>
+					<p class='font-body text-[14px] lg:text-[15px] text-[#64748B] leading-relaxed max-w-[55ch]'>
 						Lorem ipsum dolor sit amet consectetur adipiscing elit sociis viverra, volutpat ornare ridiculus magna nulla inceptos egestas scelerisque mus habitant, accumsan ac parturient euismod sollicitudin eget arcu nostra.
-					</p>
-					<p class='font-body text-[14px] lg:text-[15px] text-[#64748B] leading-relaxed'>
+				<br> <br>
 						Metus urna a proin morbi sapien augue praesent leo, orci congue eros vulputate ultrices himenaeos neque, luctus vel conubia etiam habitasse vestibulum tristique. Tellus accumsan id semper scelerisque turpis euismod, enim elementum ad cubilia orci.
 					</p>
 				</div>
@@ -43,7 +42,7 @@ const investorCard = {
 					<img
 						src={leader.avatar}
 						alt={leader.name}
-						class='w-12 h-12 rounded-full object-cover grayscale'
+						class='w-12 h-12  object-cover '
 					/>
 					<div>
 						<p class='font-display font-semibold text-[15px] text-[#0F172A]'>{leader.name}</p>
@@ -56,20 +55,24 @@ const investorCard = {
 			<div class='relative' data-aos='fade-left' data-aos-duration='800' data-aos-delay='100'>
 				<div class='overflow-hidden'>
 					<img
-						src='/img/about.jpg'
+						src='/img/office.webp'
 						alt='Harbor Capital office'
-						class='w-full h-[420px] lg:h-[500px] object-cover'
+						class='w-full h-[420px] lg:h-[650px] object-cover'
 					/>
 				</div>
 
 				<!-- Floating card -->
 				<div
-					class='absolute bottom-6 left-6 bg-[#0F172A] text-white p-5 max-w-[200px] lg:max-w-[220px]'
+					class='absolute bottom-[-8%] left-[-8%] bg-[#0F172A] text-white p-5 max-w-[200px] lg:max-w-[220px]'
 					data-aos='fade-up'
 					data-aos-delay='300'
 					data-aos-duration='700'
 				>
-					<p class='font-body text-[22px] mb-3 text-[#B59A5D]'>⌂</p>
+					<img
+					src={investorCard.icon}
+					alt={investorCard.icon}
+					class='w-6 h-6 object-cover '
+				/>
 					<p class='font-body text-[13px] leading-relaxed text-[#94A3B8]'>
 						{investorCard.text}
 					</p>
