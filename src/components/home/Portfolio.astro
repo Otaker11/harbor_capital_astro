@@ -1,4 +1,10 @@
 ---
+import { Image } from 'astro:assets';
+
+import img1 from '../../assets/img/portfolio/portfolio1.webp';
+import img2 from '../../assets/img/portfolio/portfolio2.webp';
+import img3 from '../../assets/img/portfolio/portfolio3.webp';
+
 const properties = [
 	{
 		id: 1,
@@ -7,7 +13,7 @@ const properties = [
 		location: 'Class-A Multifamily | Wynwood District',
 		badge: 'ACQUIRED 2022',
 		stat: '98% OCCUPANCY',
-		img: '/img/portfolio/portfolio1.webp',
+		img: img1,
 		link: '#contact',
 		size: 'large',
 	},
@@ -18,7 +24,7 @@ const properties = [
 		location: 'Garden-Style Value Add',
 		badge: null,
 		stat: 'STABILIZED',
-		img: '/img/portfolio/portfolio2.webp',
+		img: img2,
 		link: '#contact',
 		size: 'small',
 	},
@@ -32,18 +38,19 @@ const properties = [
 		desc: 'A vertically integrated mixed-use development anchored by institutional-grade multifamily units in the heart of Charlotte\'s growth corridor.',
 		units: '482',
 		occupancy: '96.4%',
-		img: '/img/portfolio/portfolio3.webp',
+		img: img3,
 		link: '#contact',
 		size: 'featured',
 	},
 ]
+
 ---
 
 <section id='portfolio' class='py-20 md:py-24 lg:py-28 bg-[#F8FAFC] h-full'>
 	<div class='px-[5vw] mx-auto'>
 
 		<div class='mb-12 md:mb-16' data-aos='fade-up'>
-			<p class='font-body font-semibold text-[10px] md:text-[11px] uppercase tracking-[0.14em] text-[#B59A5D] mb-3'>
+			<p class='font-body font-bold text-[12px] md:text-[16px] uppercase tracking-[0.14em] text-primary mb-3'>
 				Investment Portfolio
 			</p>
 			<h2 class='font-display font-semibold text-[1.75rem] md:text-[2.25rem] lg:text-[2.75rem] text-[#0F172A] leading-tight'>
@@ -65,9 +72,13 @@ const properties = [
 					data-aos-delay='0'
 				>
 					<div class='overflow-hidden h-56 lg:h-102'>
-						<img
+						<Image
 							src={properties[0].img}
 							alt={properties[0].name}
+							widths={[768, 1280, 1920]}
+							sizes="(max-width: 1024px) 100vw, 66vw"
+							quality={70}
+							format="webp"
 							class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
 						/>
 					</div>
@@ -76,7 +87,7 @@ const properties = [
 							<p class='font-display font-semibold text-[1.1rem] lg:text-[1.25rem] text-[#0F172A] mb-1'>
 								{properties[0].name}
 							</p>
-							<p class='font-body text-[12px] text-[#94A3B8]'>
+							<p class='font-body text-[12px] text-primary font-semibold'>
 								{properties[0].location}
 							</p>
 						</div>
@@ -98,9 +109,13 @@ const properties = [
 					data-aos-delay='100'
 				>
 					<div class='overflow-hidden h-56 lg:h-102'>
-						<img
+						<Image
 							src={properties[1].img}
 							alt={properties[1].name}
+							widths={[768, 1280, 1920]}
+							sizes="(max-width: 1024px) 100vw, 66vw"
+							quality={70}
+							format="webp"
 							class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
 						/>
 					</div>
@@ -108,7 +123,7 @@ const properties = [
 						<p class='font-display font-semibold text-[1.1rem] lg:text-[1.25rem] text-[#0F172A] mb-1'>
 							{properties[1].name}
 						</p>
-						<p class='font-body text-[12px] text-[#94A3B8]'>
+						<p class='font-body text-[12px] text-primary font-semibold'>
 							{properties[1].location}
 						</p>
 					</div>
@@ -122,15 +137,19 @@ const properties = [
 				data-aos-delay='150'
 			>
 				<div class='col-span-4 overflow-hidden lg:h-102'>
-					<img
-						src={properties[2].img}
-						alt={properties[2].name}
+					<Image
+							src={properties[2].img}
+							alt={properties[2].name}
+							widths={[768, 1280, 1920]}
+							sizes="(max-width: 1024px) 100vw, 66vw"
+							quality={70}
+							format="webp"
 						class='w-full h-full object-cover transition-transform duration-700 group-hover:scale-105'
 					/>
 				</div>
 				<div class='col-span-3 p-8 lg:p-10 flex flex-col justify-center'>
 					{properties[2].badge && (
-						<p class='font-body font-semibold text-[10px] uppercase tracking-[0.14em] text-[#B59A5D] mb-3'>
+						<p class='font-body font-semibold text-[10px] uppercase tracking-[0.14em] text-primary mb-3'>
 							{properties[2].badge}
 						</p>
 					)}
@@ -143,11 +162,11 @@ const properties = [
 					<div class='flex gap-10'>
 						<div>
 							<p class='font-display font-semibold text-[1.25rem] text-[#0F172A]'>{properties[2].units}</p>
-							<p class='font-body text-[11px] uppercase tracking-[0.1em] text-[#94A3B8] mt-1'>Total Units</p>
+							<p class='font-body text-[11px] uppercase tracking-[0.1em] text-primary font-semibold mt-1'>Total Units</p>
 						</div>
 						<div>
 							<p class='font-display font-semibold text-[1.25rem] text-[#0F172A]'>{properties[2].occupancy}</p>
-							<p class='font-body text-[11px] uppercase tracking-[0.1em] text-[#94A3B8] mt-1'>Occupancy</p>
+							<p class='font-body text-[11px] uppercase tracking-[0.1em] text-primary font-semibold mt-1'>Occupancy</p>
 						</div>
 					</div>
 				</div>
@@ -163,15 +182,20 @@ const properties = [
 					data-aos-delay={i * 80}
 				>
 					<div class='overflow-hidden h-52 relative'>
-						<img
+						<Image
 							src={prop.img}
 							alt={prop.name}
+							widths={[400, 768]}
+							sizes="100vw"
+							quality={70}
+							loading="lazy"
+							decoding="async"
 							class='w-full h-full object-cover'
 						/>
 					</div>
 
 					<div class='p-5'>
-						<p class='font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-[#B59A5D] mb-2'>
+						<p class='font-body font-semibold text-[11px] uppercase tracking-[0.12em] text-primary mb-2'>
 							{prop.category}
 						</p>
 						<p class='font-display font-semibold text-[1.1rem] text-[#0F172A] mb-4 leading-snug'>
@@ -186,7 +210,7 @@ const properties = [
 							<span class='font-body font-medium text-[11px] uppercase tracking-[0.1em] text-[#64748B]'>
 								{prop.stat ?? (prop.units ? `${prop.units} Units · ${prop.occupancy} Occ.` : '')}
 							</span>
-							<a href={prop.link} class='text-[#0F172A] hover:text-[#B59A5D] transition-colors'>
+							<a href={prop.link} class='text-[#0F172A] hover:text-primary transition-colors'>
 								<svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='1.5'>
 									<line x1='5' y1='12' x2='19' y2='12'/><polyline points='12 5 19 12 12 19'/>
 								</svg>

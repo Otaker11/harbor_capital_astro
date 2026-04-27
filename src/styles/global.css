@@ -5,13 +5,10 @@
 }
 
 @theme {
-	/* ── Harbor Capital – Color Palette ── */
-	--color-primary:        #0F172A;   /* Navy dark  */
-	--color-secondary:      #94A3B8;   /* Blue-grey  */
-	--color-tertiary:       #B59A5D;   /* Gold       */
-	--color-neutral:        #F8FAFC;   /* Off-white  */
-
-	/* Aliases semánticos */
+	--color-primary:        #0F172A;
+	--color-secondary:      #94A3B8;
+	--color-tertiary:       #B59A5D;
+	--color-neutral:        #F8FAFC;
 	--color-navy:           #0F172A;
 	--color-navy-mid:       #1E2D45;
 	--color-gold:           #B59A5D;
@@ -23,13 +20,20 @@
 	--color-text-muted:     #64748B;
 	--color-border:         #E2E8F0;
 
-	/* ── Tipografías ── */
-	--font-display: 'Noto Serif', serif;       /* Títulos / Headlines */
-	--font-body:    'Public Sans', sans-serif; /* Body, labels, nav   */
-	--font-mono:    'JetBrains Mono', monospace;
+	--font-display: 'Noto Serif', Georgia, 'Times New Roman', serif;
+	--font-body:    'Public Sans', system-ui, -apple-system, sans-serif;
+	--font-mono:    'JetBrains Mono', 'Courier New', monospace;
 
-	/* ── Letter Spacing ── */
-	--tracking-tightest: -0.03em;
-	--tracking-wide:      0.08em;
-	--tracking-widest:    0.15em;
+	--tracking-wide:    0.08em;
+	--tracking-widest:  0.15em;
+}
+
+@font-face {
+	font-family: 'Noto Serif';
+	font-display: swap;
+}
+
+@font-face {
+	font-family: 'Public Sans';
+	font-display: swap;
 }
